@@ -1,26 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as St from "./App.styles";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <St.Container>
+      <St.Header>
+        <St.HeaderText>Sistema Financeiro</St.HeaderText>
+      </St.Header>
+      <St.Body>
+        {/* Area de Informções */}
+        {/* Area de Inserção */}
+        {/* tabela de itens */}
+      </St.Body>
+    </St.Container>
   );
-}
+};
 
 export default App;
