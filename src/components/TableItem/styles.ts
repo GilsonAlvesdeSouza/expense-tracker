@@ -16,3 +16,11 @@ export const Category = styled.div<{ color: string }>`
     border-radius: 5px;
     background-color: ${props => props.color};
 `;
+
+export const Value = styled.div<{ color: string }>`
+    background-color: ${props => props.color};
+    padding: 5px 10px;
+    color: #FFF;
+    border-radius: 5px;
+    display: inline-block;
+`;

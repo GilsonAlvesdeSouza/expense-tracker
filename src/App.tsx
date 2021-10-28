@@ -6,16 +6,38 @@ import { categories } from "./data/categories";
 import { items } from "./data/items";
 import * as helpers from "./helpers/dateFilter"
 import { TableArea } from "./components/tableArea";
+import { InfoArea } from "./components/IfoArea";
 
 const App = () => {
 
-  const [list, settList] = useState(items);
+  const [list] = useState(items);
   const [filteredList, setFilteredList] = useState<Item[]>([]);
-  const [currentMonth, setCurrentMOnth] = useState(helpers.getCurrentMonth());
+  const [currentMonth, setCurrentMonth] = useState(helpers.getCurrentMonth());
+  const [income, setIncome] = useState(0);
+  const [expense, setExpense] = useState(0);
 
   useEffect(() => {
     setFilteredList(helpers.filtrtListByMonth(list, currentMonth));
   }, [list, currentMonth]);
+
+  const handleMonthChange = (newMonth: string): void => {
+    setCurrentMonth(newMonth);
+  };
+
+  useEffect(() => {
+    let incomeCount= 0;
+    let expenseCount = 0;
+
+    for (const i in filteredList) {
+      if (categories[filteredList[i].category].expense) {
+        expenseCount += filteredList[i].value;
+      } else {
+        incomeCount+= filteredList[i].value;
+      }
+    }
+    setIncome(incomeCount);
+    setExpense(expenseCount);
+  }, [filteredList]);
 
   return (
     <St.Container>
@@ -23,9 +45,15 @@ const App = () => {
         <St.HeaderText>Sistema Financeiro</St.HeaderText>
       </St.Header>
       <St.Body>
-        {/* Area de Informções */}
+        <InfoArea
+          currentMonth={currentMonth}
+          onMonthChange={handleMonthChange}
+          income={income}
+          expense={expense}
+        />
+
         {/* Area de Inserção */}
-        <TableArea list={filteredList}/>
+        <TableArea list={filteredList} />
       </St.Body>
     </St.Container>
   );
