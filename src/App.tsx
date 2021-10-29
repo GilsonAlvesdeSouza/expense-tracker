@@ -7,6 +7,7 @@ import { items } from "./data/items";
 import * as helpers from "./helpers/dateFilter"
 import { TableArea } from "./components/tableArea";
 import { InfoArea } from "./components/IfoArea";
+import { FormArea } from "./components/FormArea";
 
 const App = () => {
 
@@ -25,14 +26,14 @@ const App = () => {
   };
 
   useEffect(() => {
-    let incomeCount= 0;
+    let incomeCount = 0;
     let expenseCount = 0;
 
     for (const i in filteredList) {
       if (categories[filteredList[i].category].expense) {
         expenseCount += filteredList[i].value;
       } else {
-        incomeCount+= filteredList[i].value;
+        incomeCount += filteredList[i].value;
       }
     }
     setIncome(incomeCount);
@@ -51,8 +52,7 @@ const App = () => {
           income={income}
           expense={expense}
         />
-
-        {/* Area de Inserção */}
+        <FormArea />
         <TableArea list={filteredList} />
       </St.Body>
     </St.Container>
