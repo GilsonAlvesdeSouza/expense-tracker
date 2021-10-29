@@ -11,7 +11,7 @@ import { FormArea } from "./components/FormArea";
 
 const App = () => {
 
-  const [list] = useState(items);
+  const [list, setList] = useState(items);
   const [filteredList, setFilteredList] = useState<Item[]>([]);
   const [currentMonth, setCurrentMonth] = useState(helpers.getCurrentMonth());
   const [income, setIncome] = useState(0);
@@ -24,6 +24,8 @@ const App = () => {
   const handleMonthChange = (newMonth: string): void => {
     setCurrentMonth(newMonth);
   };
+
+  console.log(list);
 
   useEffect(() => {
     let incomeCount = 0;
@@ -40,6 +42,10 @@ const App = () => {
     setExpense(expenseCount);
   }, [filteredList]);
 
+  const addItemList = (newList: Item[]): void => {
+    setList(newList);
+  };
+
   return (
     <St.Container>
       <St.Header>
@@ -52,7 +58,7 @@ const App = () => {
           income={income}
           expense={expense}
         />
-        <FormArea />
+        <FormArea addItemList={addItemList} list={list} />
         <TableArea list={filteredList} />
       </St.Body>
     </St.Container>

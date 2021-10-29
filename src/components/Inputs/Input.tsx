@@ -11,7 +11,8 @@ type InputProps = JSX.IntrinsicElements['input'] & Props
 
 export const Input = ({ name, label, ...rest }: InputProps) => {
     const inputRef = useRef<HTMLInputElement>(null)
-    const { fieldName, defaultValue, registerField, error } = useField(name)
+    const { fieldName, defaultValue, registerField, error, clearError } = useField(name)
+    
     useEffect(() => {
         registerField({
             name: fieldName,
@@ -28,9 +29,10 @@ export const Input = ({ name, label, ...rest }: InputProps) => {
         })
     }, [fieldName, registerField])
     return (
-        <St.Container>
+        <St.Container error={error ? "#DB4A39" : ''}>
             {label && <label htmlFor={fieldName}>{label}</label>}
             <input
+                onFocus={clearError}
                 id={fieldName}
                 ref={inputRef}
                 defaultValue={defaultValue}

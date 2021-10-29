@@ -6,6 +6,11 @@ export const Container = styled.div`
     border-radius: 10px;
     padding: 20px;
     margin-top: 20px;
+
+    h2{
+        text-align: center;
+        margin-top: -5px;
+    }
 `;
 
 export const Content = styled.div`

@@ -1,3 +1,4 @@
+import { DateType } from "../types/date";
 import { Item } from "../types/Item";
 
 export const getCurrentMonth = (): string => {
@@ -35,4 +36,23 @@ export const formatCurrentMonth =(currentMonth:string): string=>{
     let months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
     return `${months[parseInt(month) -1]} de ${year}`;
+}
+
+export const getTransformeDataForm = (date: string): DateType => {
+    let dateFormt: DateType = {
+        year: 0,
+        month: 0,
+        day: 0
+    };
+    
+
+    const [year, month, day] = date.split('-');
+
+    dateFormt = {
+        year: parseInt(year),
+        month: parseInt(month)-1,
+        day: parseInt(day)
+    };
+
+    return dateFormt
 }
